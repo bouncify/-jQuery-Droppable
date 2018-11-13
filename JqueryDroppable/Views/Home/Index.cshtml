@@ -6,14 +6,15 @@
 <title>droppable demo</title>
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
 <style>
-    #draggable {
+    .draggable {
         width: 100px;
         height: 100px;
         background: #ccc;
-        top: 20px;
+        top: 150px;
+        position: initial;
     }
 
-    #droppable {
+    .droppable {
         position: absolute;
         left: 250px;
         top: 70px;
@@ -26,17 +27,23 @@
 </style>
 <script src="//code.jquery.com/jquery-1.12.4.js"></script>
 <script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script src="~/Scripts/jquery.ui.touch-punch.min.js"></script>
 
+<div id="droppable1" class="droppable">Drop here</div>
 
-<div id="droppable">Drop here</div>
-
-<div id="draggable">Drag me</div>
+<div id="draggable1" class="draggable">Drag me1</div>
+<div id="draggable2" class="draggable">Drag me2</div>
 
 <script>
-$( "#draggable" ).draggable();
-$( "#droppable" ).droppable({
-  drop: function() {
-    alert( "dropped" );
-  }
-});
+    $("div.draggable").draggable();
+
+    $("div.droppable").droppable({
+
+        drop: function (event, ui) {
+            var sourceId = ui.draggable.context.id;
+            var targetId = event.target.id;
+
+            alert(sourceId + " dropped on " + targetId);
+        }
+    });
 </script>
